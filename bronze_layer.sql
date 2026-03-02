@@ -68,7 +68,8 @@ Implemented a stored procedure to validate and retrieve ingested data from all s
 */
 
 delimiter $$
-create procedure if not exists bronze()
+drop procedure if exists bronze$$
+create procedure bronze()
 begin
 	select * from cust_info;
     select * from prd_info;
