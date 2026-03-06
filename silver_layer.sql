@@ -1,4 +1,3 @@
-
 delimiter $$
 drop procedure if exists silver_layer $$
 create procedure silver_layer()
