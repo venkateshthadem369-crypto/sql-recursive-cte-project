@@ -1,3 +1,4 @@
+use bronze;
 delimiter $$
 drop procedure if exists silver_layer $$
 create procedure silver_layer()
@@ -5,7 +6,7 @@ Begin
 	/* we can use belw syntax for creating empty tables like another one*/
 	-- CREATE TABLE bronze.sales_details
 	-- LIKE datawarehouse.sales_detals;
-	
+	truncate table bronze.cust_info;
 	insert into bronze.cust_info
 	select * 
 	from 
@@ -44,6 +45,7 @@ Begin
 		)temp
 	) temp;
 	
+    truncate table bronze.prd_info;
 	insert into bronze.prd_info
 	select *
 	from
@@ -73,33 +75,33 @@ Begin
 	-- alter table sales_details 
 	-- add column dwh_create_dt datetime default current_timestamp;
 	
-	select 
-		sls_ord_num,
-	    sls_prd_key,
-	    sls_cust_id,
-	    case 
-			when sls_order_dt =0 or length(sls_order_dt) != 10 then null
-	        else sls_order_dt
-		end sls_order_dt,
-	    case 
-			when sls_ship_dt = 0 or length(sls_ship_dt) != 10 then null
-	        else sls_ship_dt
-		end sls_ship_dt,
-	    case 
-			when sls_due_dt = 0 or length(sls_due_dt) != 10 then null
-	        else sls_due_dt
-		end sls_due_dt,
-	    sls_sales,
-	    sls_quantity,
-	    sls_price
-	from datawarehouse.sales_detals;
+-- 	select 
+-- 		sls_ord_num,
+-- 	    sls_prd_key,
+-- 	    sls_cust_id,
+-- 	    case 
+-- 			when sls_order_dt =0 or length(sls_order_dt) != 10 then null
+-- 	        else sls_order_dt
+-- 		end sls_order_dt,
+-- 	    case 
+-- 			when sls_ship_dt = 0 or length(sls_ship_dt) != 10 then null
+-- 	        else sls_ship_dt
+-- 		end sls_ship_dt,
+-- 	    case 
+-- 			when sls_due_dt = 0 or length(sls_due_dt) != 10 then null
+-- 	        else sls_due_dt
+-- 		end sls_due_dt,
+-- 	    sls_sales,
+-- 	    sls_quantity,
+-- 	    sls_price
+-- 	from datawarehouse.sales_detals;
 	
 	-- CREATE TABLE bronze.sales_details
 	-- LIKE datawarehouse.sales_detals;
 	
 	-- alter table sales_details 
 	-- add column dwh_create_dt datetime default current_timestamp;
-	
+	truncate table bronze.sales_details;
 	insert into bronze.sales_details
 	select sls_ord_num,
 		   sls_prd_key,
@@ -149,7 +151,7 @@ Begin
 	
 	-- alter table bronze.cust_az12
 	-- add column dwh_create_dt datetime default current_timestamp
-	
+	truncate table bronze.cust_az12;
 	insert into bronze.cust_az12
 	SELECT
 		CASE
@@ -173,7 +175,7 @@ Begin
 	
 	-- alter table bronze.loc_a101
 	-- add column dwh_create_dt datetime default current_timestamp 
-	
+	truncate table bronze.loc_a101;
 	insert into bronze.loc_a101
 	select replace(cid,'-','') cid,
 		case 
@@ -190,7 +192,7 @@ Begin
 	
 	-- alter table px_cat_g1v2
 	-- add column dwh_create_dt datetime default current_timestamp
-	
+	truncate table bronze.px_cat_g1v2;
 	insert into bronze.px_cat_g1v2
 	select ID,
 		cat,
@@ -200,3 +202,5 @@ Begin
 	from datawarehouse.px_cat_g1v2;
 End $$
 delimiter ;
+
+
