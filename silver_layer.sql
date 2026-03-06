@@ -17,8 +17,8 @@ Begin
 	    trim(cst_lastname),
 	    (
 			case upper(cst_marital_status)
-				when 'M' then 'Male'
-				when 'F' then 'Female'
+				when 'M' then 'Married'
+				when 'S' then 'Single'
 				else 'other'
 			end
 	    ) cst_marital_status,
