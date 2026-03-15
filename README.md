@@ -1,4 +1,4 @@
-\# SQL Recursive CTE Analysis
+**\# SQL Recursive CTE Analysis**
 
 
 
@@ -26,7 +26,7 @@ Identify hackers who submitted solutions continuously across challenge days and 
 
 
 
-\## Dataset
+**\## Dataset**
 
 Submission dataset containing:
 
@@ -90,7 +90,7 @@ SELECT \*
 
 FROM cte;
 
-Project Structure
+**Project Structure**
 
 sql-recursive-cte-analysis
 
